@@ -54,6 +54,7 @@
 
             <button onclick="return_to_dashboard('{{ user.username }}')" class="menu-button"><span>{% bs_icon 'speedometer' color='white' size='21px' %}</span> <p class="label">Dashboard</p> </button>
             
+            <button class="menu-button" onclick="window.location.href='{% url 'mongodb' %}'"><span>{% bs_icon 'database' color='white' size='21px' %}</span> <p class="label">MongoDB</p> </button>
             <!-- Agrega más botones aquí si es necesario -->
           </div>
 

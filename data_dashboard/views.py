@@ -91,4 +91,7 @@ def dashboard(request):
     
     
     return render(request, 'index.html')
+
+def mongodb(request):
+    return render(request, 'mongodb.html')
     
