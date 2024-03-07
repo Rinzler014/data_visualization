@@ -1,58 +1,58 @@
 @font-face {
-    font-family: "Geforce";
-    src: url("../assets/fonts/GeForce-Bold-Alt.ttf");
-  }
-  
-body {
-  background-color: #212121;
+  font-family: 'Geforce';
+  src: url('../assets/fonts/GeForce-Bold-Alt.ttf');
 }
-  
-  .dashboard {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    border-radius: 7px;
-    color: #efefef;
-    justify-content: center;
-    align-items: center;
-  }
+
+body {
+  background-color: #fbfaf5;
+}
+
+.dashboard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 7px;
+  color: #333;
+  justify-content: center;
+  align-items: center;
+}
 
 .graph-container {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
 }
 
 .container-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    justify-content: left;
-    align-items: left;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: left;
+  align-items: left;
 }
 
 .dropdown {
-    width: 165px;
+  width: 165px;
 }
 
 .menu {
-    width: 100%;
+  width: 100%;
 }
 
 .selections {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn {
-    margin-top: 10px;
-    width: 100%;
+  margin-top: 10px;
+  width: 100%;
 }
 
 .graph {
@@ -66,21 +66,42 @@ body {
 
 .graph-message {
   font-size: 25px;
-  font-family:"Titillium";
+  font-family: Arial, Helvetica, sans-serif;
   color: #efefef;
   text-align: center;
   padding: 25px;
-  border: 5px solid #123b7a;
-  background-color: #1851a6;
+  background-color: #236fd2;
   border-radius: 14px;
+  box-shadow: 12px 17px 21px -5px rgba(181, 181, 181, 0.41);
+  -webkit-box-shadow: 12px 17px 21px -5px rgba(181, 181, 181, 0.41);
+  -moz-box-shadow: 12px 17px 21px -5px rgba(181, 181, 181, 0.41);
 }
 
 .title {
-  font-size: 30px;
-  font-family:"Titillium";
-  color: #efefef;
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #444;
   text-align: center;
   padding: 25px;
-  border: 5px solid #123b7a;
-  border-radius: 14px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: fadeIn 4s forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transition-timing-function: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transition-timing-function: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transition-timing-function: scale(1);
+  }
 }
