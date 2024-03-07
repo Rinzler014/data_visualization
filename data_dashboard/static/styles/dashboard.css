@@ -3,19 +3,9 @@
     src: url("../assets/fonts/GeForce-Bold-Alt.ttf");
   }
   
-  
-  body {
-    --s: 200px; /* control the size */
-    --c1: #1d1d1d;
-    --c2: #4e4f51;
-    --c3: #3c3c3c;
-    
-    background:
-      repeating-conic-gradient(from 30deg,#0000 0 120deg,var(--c3) 0 180deg) 
-      calc(.5*var(--s)) calc(.5*var(--s)*0.577),
-      repeating-conic-gradient(from 30deg,var(--c1) 0 60deg,var(--c2) 0 120deg,var(--c3) 0 180deg);
-    background-size: var(--s) calc(var(--s)*0.577);
-  }
+body {
+  background-color: #212121;
+}
   
   .dashboard {
     width: 100%;
@@ -46,5 +36,51 @@
 }
 
 .dropdown {
-    width: max-content;
+    width: 165px;
+}
+
+.menu {
+    width: 100%;
+}
+
+.selections {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.graph {
+  width: 1000px;
+  height: 470px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.graph-message {
+  font-size: 25px;
+  font-family:"Titillium";
+  color: #efefef;
+  text-align: center;
+  padding: 25px;
+  border: 5px solid #123b7a;
+  background-color: #1851a6;
+  border-radius: 14px;
+}
+
+.title {
+  font-size: 30px;
+  font-family:"Titillium";
+  color: #efefef;
+  text-align: center;
+  padding: 25px;
+  border: 5px solid #123b7a;
+  border-radius: 14px;
 }
