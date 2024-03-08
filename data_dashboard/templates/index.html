@@ -12,26 +12,34 @@
     <link rel="stylesheet" href="{% static 'styles/dashboard.css' %}">
 
     <div class="dashboard">
-        <p>Display de graficas</p>
+        <p class="title">Visualizacion de Datos AWAQ</p>
         <div class="graph-container">
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown button
-                </button>
-                <ul class="dropdown-menu">
-                  <li><input type="text" class="dropdown-item" value="Grafico de Barras"></li>
-                  <li><input type="text" class="dropdown-item" value="Grafico de Lineas"></li>
-                  <li><input type="text" class="dropdown-item" value="Grafico de Burbujas"></li>
-                  <li><input type="text" class="dropdown-item" value="Grafico de Pastel"></li>
-                  <li><input type="text" class="dropdown-item" value="Grafico de Dispersion"></li>
-                  <li><input type="text" class="dropdown-item" value="Grafico de Mapa de Calor"></li>
-                </ul>
-              </div>
+            <div class="selections">
+                <form action="" method="POST">
+
+                    {% csrf_token %}
+
+                    <p>Selecione una grafica para mostrar</p>
+                    
+                    <select class="form-select menu" aria-label="Default select example" id="graph" name="graph">
+                        <option value="bar">Barras</option>
+                        <option value="line">Lineas</option>
+                        <option value="bubble">Burbujas</option>
+                        <option value="pie">Pastel</option>
+                        <option value="dispersion">Dispersion</option>
+                        <option value="map">Mapa de Calor</option>
+                    </select>
+
+                    <button type="submit" class="btn btn-primary">Graficar</button>
+
+                </form>
+
+            </div>
             <div class="graph">
                 {% if plot %}
                     {{ plot|safe }}
                 {% else %}
-                    <p>Seleccione un tipo de grafico para mostrar</p>
+                    <p class="graph-message">Seleccione un tipo de grafico para mostrar</p>
                 {% endif %}
             </div>
         </div>
