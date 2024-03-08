@@ -31,3 +31,4 @@ websockets==11.0.3
 pandas
 django-csp
 django-user-agents
+whitenoise
