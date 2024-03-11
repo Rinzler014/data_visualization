@@ -14,3 +14,4 @@ pytz
 plotly
 django-csp
 django-user-agents
+pymssql
