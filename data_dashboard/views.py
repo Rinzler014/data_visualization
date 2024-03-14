@@ -14,7 +14,7 @@ def dashboard(request):
     if request.method == 'POST':
         
         query = """
-                SELECT * FROM [dbo].[birds];
+                SELECT * FROM [dbo].[Animals];
                 """
         cursor.execute(query)
         rows = cursor.fetchall()
@@ -33,13 +33,12 @@ def dashboard(request):
 
         if plot == 'bar':
             
+            df_family = df.groupby('family').size().reset_index(name='Count')
             
-            df_avg_altitude = df.groupby('date').size().reset_index(name='Count')
-            
-            fig = px.bar(df_avg_altitude,
-                        x="date",
+            fig = px.bar(df_family,
+                        x="family",
                         y='Count',
-                        title=f'Count of registers by date')
+                        title=f'Conteo de registros por familia')
             
             fig.update_layout(
                     font=dict(size=13, family="Lato"),
@@ -53,45 +52,27 @@ def dashboard(request):
                 )
             
             fig.update_xaxes(
-                    tickangle=35,
-                    title_text="Fecha",
+                    tickangle=90,
+                    title_text="Familia",
                     tickmode="linear",
-                    gridcolor="#424242",
+                    gridcolor="#9A9A9A",
+                    showgrid=False,
                 )
 
             fig.update_yaxes(
                 title_text="Registros",
                 showgrid=True,
-                gridcolor="#424242",
+                gridcolor="#9A9A9A",
             )
             
             context["plot"] = fig.to_html(full_html=False, default_height=800, default_width=1000)
             context["plot_title"] = "Barras"
         
-        if plot == 'map':
-            
-            df_map = df.groupby(['Latitude', 'Longitude', 'species']).size().reset_index(name='count')
-            df_map = df_map.rename(columns={'Latitude': 'Latitude', 'Longitude': 'Longitude', 'species': 'Species', 'count': 'Count'})
-            fig = px.scatter_mapbox(df_map, lat="Latitude", lon="Longitude", color="Species", size="Count", zoom=3, height=470)
-            fig.update_layout(
-                mapbox_style="open-street-map",
-                margin={"r":0,"t":0,"l":0,"b":0},
-                font=dict(size=13, family="Lato"),
-                title_font=dict(size=20),
-                title_y=0.93,
-                    plot_bgcolor="#fbfaf5",
-                    paper_bgcolor="#fbfaf5",
-                    font_color="#333",
-                width=1000,
-                height=470,
-            )
-            
-            context["plot"] = fig.to_html(full_html=False, default_height=800, default_width=1000)
-            context["plot_title"] = "Mapa"
-        
         if plot == 'pie':
             
-            fig = px.pie(df_count, values='Count', names=df_count.index, title='Count of Species by Location')
+            df_count = df.groupby('conservation_status').size().reset_index(name='count')
+            
+            fig = px.pie(df_count, values=df_count.index, names='conservation_status', title='Recuento de Conservaciones')
             fig.update_layout(
                 font=dict(size=13, family="Lato"),
                 title_font=dict(size=20),
@@ -106,39 +87,11 @@ def dashboard(request):
             context["plot"] = fig.to_html(full_html=False, default_height=800, default_width=1000)
             context["plot_title"] = "Pie"
       
-        if plot == 'line':
-            
-            #Group the data by the averge age of each location
-            df_line = df.groupby('Location')['species'].mean().reset_index()
-            df_line = df_line.rename(columns={'Location': 'Lugar', 'species': 'Especies'})
-            fig = px.bar(df_line, x='Lugar', y='Edad Promedio', color='Edad Promedio', title='Edad Promedio por Ubicacion')
-            fig.update_layout(
-                font=dict(size=13, family="Lato"),
-                title_font=dict(size=20),
-                title_y=0.93,
-                    plot_bgcolor="#fbfaf5",
-                    paper_bgcolor="#fbfaf5",
-                    font_color="#333",
-                width=1000,
-                height=470,
-            )
-            
-            fig.update_xaxes(
-                tickangle=35,
-                gridcolor="#424242",
-            )
-            
-            fig.update_yaxes(showgrid=True, 
-                             gridcolor="#424242")
-            
-            context["plot"] = fig.to_html(full_html=False, default_height=800, default_width=1000)
-            context["plot_title"] = "Line"    
-        
         if plot == 'bubble' :
             
-            df_bubble = df.groupby(['species', 'date']).size().reset_index(name='count')
-            df_bubble = df_bubble.rename(columns={'species': 'Species', 'date': 'Date', 'count': 'Count'})
-            fig = px.scatter(df_bubble, x='Date', y='Count', size='Count', color='Species', title='Count of Species by Location')
+            df_bubble = df.groupby('family').size().reset_index(name='count')
+            
+            fig = px.scatter(df_bubble, x='family', y='count', color='family', size='count', title='Recuento de Animales')
             fig.update_layout(
                 font=dict(size=13, family="Lato"),
                 title_font=dict(size=20),
@@ -153,11 +106,9 @@ def dashboard(request):
             context["plot"] = fig.to_html(full_html=False, default_height=800, default_width=1000)
             context["plot_title"] = "Bubble"
         
-        if plot == 'dispersion':
+        if plot == 'histogram':
             
-            df_dispersion = df.groupby(['species', 'date']).size().reset_index(name='count')
-            df_dispersion = df_dispersion.rename(columns={'species': 'Species', 'date': 'Date', 'count': 'Count'})
-            fig = px.scatter(df_dispersion, x='Date', y='Count', color='Species', title='Count of Species by Location')
+            fig = px.histogram(df, x='countries', title='Countries Histogram')
             fig.update_layout(
                 font=dict(size=13, family="Lato"),
                 title_font=dict(size=20),
@@ -170,7 +121,7 @@ def dashboard(request):
             )
             
             context["plot"] = fig.to_html(full_html=False, default_height=800, default_width=1000)
-            context["plot_title"] = "Dispersion"
+            context["plot_title"] = "Histograma"
         
         return render(request, 'index.html', context=context)
     
